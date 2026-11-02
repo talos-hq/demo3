@@ -10,9 +10,9 @@ cd "$(dirname "$0")"
 
 if [[ "${1:-}" == "--verify" ]]; then
   for i in $(seq 1 20); do   # bounded: 20 x 15s = 5 min max
-    code=$(curl -sS -o /tmp/demo3-live.html -w '%{http_code}' "$PAGES_URL" || true)
+    code=$(curl -sSL -o /tmp/demo3-live.html -w '%{http_code}' "$PAGES_URL" || true)
     if [[ "$code" == 200 ]] && grep -qF "<title>$TITLE</title>" /tmp/demo3-live.html; then
-      echo "HTTP $code; title found: $TITLE"; exit 0; fi
+      curl -sS -o /dev/null -w 'no-follow: %{http_code} -> %{redirect_url}\n' "$PAGES_URL"; echo "HTTP $code (after redirects); title found: $TITLE"; exit 0; fi
     echo "attempt $i: HTTP $code"; sleep 15
   done
   echo "verify FAILED"; exit 1

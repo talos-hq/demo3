@@ -1,6 +1,8 @@
 # demo3
 
 Static page served at **https://talos-hq.github.io/demo3/** (GitHub Pages, `main` branch, root).
+The talos-hq org has a custom Pages domain, so that URL 301-redirects to **http://talosbot.ai/demo3/**;
+`publish.sh --verify` follows the redirect.
 
 ## Source / provenance
 - Original: https://gist.githubusercontent.com/Alana11nextus/8aa64596e531c729aa09c722fa3911f1/raw/zachvorhies-home-DEPLOY-index.html
